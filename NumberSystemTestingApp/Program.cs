@@ -3,17 +3,18 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Configuration;
 
 namespace NumberSystemTestingApp
 {
     class Program
     {
-        private const string numberSystemName = "BinaryNumberSystem.dll";
         //private const string numberSystemName = "DecimalNumberSystem.dll";
         static void Main(string[] args)
         {
             string path = Environment.CurrentDirectory + @"\";
-            string fileForLoad = path + numberSystemName;
+            string dllFileName = ConfigurationSettings.AppSettings["DllFile"];
+            string fileForLoad = path + dllFileName;
             if (!File.Exists(fileForLoad))
                 throw new Exception("File not exists!");
 
@@ -28,7 +29,6 @@ namespace NumberSystemTestingApp
 
             Console.WriteLine(bin.Add("101", "11"));
             Console.ReadLine();
-
         }
     }
 }
